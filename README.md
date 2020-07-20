@@ -54,16 +54,17 @@ Finally, send the request! Afterwards, you should be able to check the Network s
 
 The API ships with a appsettings.json file that is used for configuring the API. On a default install you **must** change the following values.
 
-**Token**: Make up your own password here that will be used to protect external access to the API, this is the value that you provide to the plugin.
-**ZoneID**: Use your Zone ID from the IPv6 step above.
-**X-AUTH-EMAIL**: Your Cloudflare accounts email address.
-**X-AUTH-KEY**: Use your X-AUTH-KEY from the IPv6 step above.
+- **Token**: Make up your own password here that will be used to protect external access to the API, this is the value that you provide to the plugin.
+- **ZoneID**: Use your Zone ID from the IPv6 step above.
+- **X-AUTH-EMAIL**: Your Cloudflare accounts email address.
+- **X-AUTH-KEY**: Use your X-AUTH-KEY from the IPv6 step above.
+
 
 Additionally you can tweak these options to your liking.
 
-**GraphQLURI**: The URI that the Cloudflare GraphQL API sits at, you will probably only want to change this if it gets changed in the future.
-**FirewallEventMinutes**: How far back in minutes the API will pull firewall events for, 15 by default.
-**Debug**: Whether to log debug messages, false by default.
+- **GraphQLURI**: The URI that the Cloudflare GraphQL API sits at, you will probably only want to change this if it gets changed in the future.
+- **FirewallEventMinutes**: How far back in minutes the API will pull firewall events for, 15 by default.
+- **Debug**: Whether to log debug messages, false by default.
 
 ## Exposing your API to the internet
 
