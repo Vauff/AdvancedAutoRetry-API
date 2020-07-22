@@ -24,7 +24,7 @@ Name it whatever you want, and then setup the match to check for a User Agent of
 
 ![Cloudflare Dashboard - Create a Firewall rule](https://i.imgur.com/6Ci0PDC.png "Cloudflare Dashboard - Create a Firewall rule")
 
-Next we need to disable IPv6 compatibility on the site, this is necessary because CS:GO does not support IPv6 networking, and trying to match an IPv4 address with an IPv6 one will not work and the client will not be seen as having downloaded the map. Unfortunately, Cloudflare [disabled](https://blog.cloudflare.com/always-on-ipv6/) the option for this in the dashboard, but we are still able to change it using [this API call](https://api.cloudflare.com/#zone-settings-change-ipv6-setting). You can make this call using any REST client such as Postman, or cURL in a Linux terminal as shown in this example.
+Next we need to disable IPv6 compatibility on the site, this is necessary because CS:GO does not support IPv6 networking, and trying to match an IPv4 address with an IPv6 one will not work and the client will not be seen as having downloaded the map. Unfortunately, Cloudflare [disabled](https://blog.cloudflare.com/always-on-ipv6/) the option for this in the dashboard, but we are still able to change it using [this API call](https://api.cloudflare.com/#zone-settings-change-ipv6-setting). You can make this call using any REST client such as [Postman](https://www.postman.com/product/api-client/), or [curl](https://curl.haxx.se/download.html) in a terminal as shown in this example.
 
 ```
 curl -X PATCH "https://api.cloudflare.com/client/v4/zones/023e105f4ecef8ad9ca31a8372d0c353/settings/ipv6" \
@@ -62,10 +62,12 @@ The API ships with a appsettings.json file that is used for configuring the API.
 
 Additionally you can tweak these options to your liking.
 
-- **GraphQLURI**: The URI that the Cloudflare GraphQL API sits at, you will probably only want to change this if it gets changed in the future.
+- **GraphQLURI**: The URI that the Cloudflare GraphQL API sits at, you will probably only want to change this if Cloudflare updates it in the future.
 - **FirewallEventMinutes**: How far back in minutes the API will pull firewall events for, 15 by default.
 - **Debug**: Whether to log debug messages, false by default.
 
-## Exposing your API to the internet
+## Making your API accessible
 
-Coming soon
+By default the API will not bind to a public IP, out of the box it will bind to http://localhost:5000. if you are running the API on the same server as your game server, you can just leave it this way and provide that URL to the plugin. However, if your game server is on a different server, then you must set the **ASPNETCORE_URLS** environment variable to something like http://*:5000 to make the API bind to a public IP and be accessible from the internet. Note that if you want to use a standard port like 80, the application must have root/administrator permissions.
+
+If you are running the API on a Linux server, I highly recommend following the steps in [this article](https://swimburger.net/blog/dotnet/how-to-run-aspnet-core-as-a-service-on-linux) (minus the Systemd integration package one) to have an ideal deploy. Additionally, you can also proxy the API behind another web server if you choose to do so.
