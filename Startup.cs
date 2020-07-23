@@ -35,6 +35,7 @@ namespace AdvancedAutoRetry_API
 				var client = new GraphQLHttpClient(Configuration["GraphQLURI"], new NewtonsoftJsonSerializer());
 				client.HttpClient.DefaultRequestHeaders.Add("X-AUTH-EMAIL", Configuration["X-AUTH-EMAIL"]);
 				client.HttpClient.DefaultRequestHeaders.Add("X-AUTH-KEY", Configuration["X-AUTH-KEY"]);
+				client.HttpClient.Timeout = TimeSpan.FromSeconds(10);
 				return client;
 			});
 

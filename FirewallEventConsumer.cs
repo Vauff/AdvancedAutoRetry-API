@@ -3,6 +3,7 @@ using AdvancedAutoRetry_API.Models;
 using AdvancedAutoRetry_API.ResponseTypes;
 using GraphQL;
 using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,7 +61,7 @@ namespace AdvancedAutoRetry_API
 
                     return response.Data.viewer.zones[0].firewallEventsAdaptive;
                 }
-                catch (HttpRequestException)
+                catch (Exception e) when (e is HttpRequestException || e is GraphQLHttpRequestException)
                 {
                     commFail = true;
                     attempts++;

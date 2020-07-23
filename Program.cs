@@ -11,7 +11,7 @@ namespace AdvancedAutoRetry_API
 {
 	public class Program
 	{
-		public static string version = "1.0";
+		public static string version = "1.0.1";
 		public static string Token;
 		public static string ZoneID;
 		public static int FirewallEventMinutes;
